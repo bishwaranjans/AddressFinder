@@ -33,6 +33,7 @@ namespace AddressFinder.WebApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<ILoggerManager, LoggerManager>();
+            services.AddScoped(typeof(IAddressManager), typeof(AddressManager));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

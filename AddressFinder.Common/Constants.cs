@@ -6,10 +6,10 @@ namespace AddressFinder.Common
 {
     public class Constants
     {
-        public enum WellKnownAddressExtractorCountryCode
+        public enum WellKnownAddressExtractorCountryName
         {
             /// CANADA
-            CAN
+            CA
         }
     }
 }
