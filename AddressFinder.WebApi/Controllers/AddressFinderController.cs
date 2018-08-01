@@ -1,20 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AddressFinder.Domain.SeedWork;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressFinder.WebApi.Controllers
 {
+    /// <summary>
+    /// Address Finder controller
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
     [ApiController]
     public class AddressFinderController : ControllerBase
     {
+        #region Private members
         private readonly ILoggerManager _logger;
         private readonly IAddressManager _addressManager;
+        #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddressFinderController"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="addressManager">The address manager.</param>
         public AddressFinderController(ILoggerManager logger, IAddressManager addressManager)
         {
             _logger = logger;
@@ -23,19 +30,20 @@ namespace AddressFinder.WebApi.Controllers
 
         // GET: api/AddressFinder
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IDictionary<string, string> Get()
         {
             var addressFinder = _addressManager.GetAddressFinder("CAN");
             if (addressFinder != null)
             {
-                var stringAddress = @"BISHWARANJAN SANDHU\n
+                var stringAddress = @"BISHWARANJAN SANDHU
                              Marketing Department
                              10-123 1/2 MAIN ST SE
-                             MONTREAL QC H3Z 2Y7";
+                             MONTREAL QC   H3Z 2Y7";
 
                 var addressDetails = addressFinder.GetAddressFromMultilineString(stringAddress);
+                return addressDetails;
             }
-            return new string[] { "value1", "value2" };
+            return null;
         }
 
         // GET: api/AddressFinder/5

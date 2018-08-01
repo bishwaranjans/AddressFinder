@@ -1,21 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using AddressFinder.Common;
 using AddressFinder.Domain.SeedWork;
 
 namespace AddressFinder.Infrastructure.Repositories
 {
+    /// <summary>
+    /// Address Manager
+    /// </summary>
+    /// <seealso cref="AddressFinder.Domain.SeedWork.IAddressManager" />
     public class AddressManager : IAddressManager
     {
+        #region Private members
         private readonly ILoggerManager _logger;
+        #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddressManager"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         public AddressManager(ILoggerManager logger)
         {
             _logger = logger;
         }
 
+        #region Public methods
+
+        /// <summary>
+        /// Returns an IAddressFinder based on the country name or
+        /// 2- or 3-letter ISO country code
+        /// </summary>
+        /// <param name="countryNameOrCode"></param>
+        /// <returns></returns>
         public IAddressFinder GetAddressFinder(string countryNameOrCode)
         {
             IAddressFinder addressFinder = null;
@@ -48,5 +63,6 @@ namespace AddressFinder.Infrastructure.Repositories
             }
             return addressFinder;
         }
+        #endregion
     }
 }

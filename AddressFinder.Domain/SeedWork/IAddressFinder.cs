@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace AddressFinder.Domain.SeedWork
 {
+    /// <summary>
+    /// Interface for address finder
+    /// </summary>
     public interface IAddressFinder
     {
         /// <summary>

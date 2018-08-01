@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using AddressFinder.Domain.Entities;
 using AddressFinder.Domain.SeedWork;
 using Microsoft.AspNetCore.Builder;
@@ -11,8 +7,16 @@ using Microsoft.AspNetCore.Http;
 
 namespace AddressFinder.WebApi.CustomExceptionMiddleware
 {
+    /// <summary>
+    /// Exception middleware extensions
+    /// </summary>
     public static class ExceptionMiddlewareExtensions
     {
+        /// <summary>
+        /// Configures the exception handler.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// <param name="logger">The logger.</param>
         public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerManager logger)
         {
             app.UseExceptionHandler(appError =>
@@ -36,6 +40,10 @@ namespace AddressFinder.WebApi.CustomExceptionMiddleware
                 });
             });
         }
+        /// <summary>
+        /// Configures the custom exception middleware.
+        /// </summary>
+        /// <param name="app">The application.</param>
         public static void ConfigureCustomExceptionMiddleware(this IApplicationBuilder app)
         {
             app.UseMiddleware<ExceptionMiddleware>();
