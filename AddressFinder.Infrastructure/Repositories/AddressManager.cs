@@ -41,7 +41,7 @@ namespace AddressFinder.Infrastructure.Repositories
                 var countryRegionInfo = Utilities.GetCountryByCode(countryNameOrCode) ?? Utilities.GetCountryByName(countryNameOrCode);
                 if (countryRegionInfo == null)
                 {
-                    _logger.LogError("Invalid country code or country name.");
+                    _logger.LogError($"Invalid country code or country name. Value provided {countryNameOrCode}");
                     return null;
                 }
 

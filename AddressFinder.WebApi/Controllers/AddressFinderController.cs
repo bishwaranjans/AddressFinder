@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using AddressFinder.Domain.SeedWork;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace AddressFinder.WebApi.Controllers
 {
@@ -46,6 +48,10 @@ namespace AddressFinder.WebApi.Controllers
                 var addressDetails = canadaianAddressFinder.GetAddressFromMultilineString(stringAddress);
                 testAddress.Add("CAN", addressDetails);
             }
+            else
+            {
+                throw new HttpRequestException("Please provide a valid country code or country name.");
+            }
 
             // NETHERLANDS address
             var generalAddressFinder1 = _addressManager.GetAddressFinder("NETHERLANDS");
@@ -58,6 +64,10 @@ namespace AddressFinder.WebApi.Controllers
 
                 var addressDetails = generalAddressFinder1.GetAddressFromMultilineString(stringAddress);
                 testAddress.Add("NETHERLANDS", addressDetails);
+            }
+            else
+            {
+                throw new HttpRequestException("Please provide a valid country code or country name.");
             }
 
             // USA
@@ -72,6 +82,11 @@ namespace AddressFinder.WebApi.Controllers
                 var addressDetails = generalAddressFinder2.GetAddressFromMultilineString(stringAddress);
                 testAddress.Add("USA", addressDetails);
             }
+            else
+            {
+                throw new HttpRequestException("Please provide a valid country code or country name.");
+            }
+
             return testAddress;
         }
 
