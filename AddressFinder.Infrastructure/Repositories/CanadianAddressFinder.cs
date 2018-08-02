@@ -93,7 +93,7 @@ namespace AddressFinder.Infrastructure.Repositories
                     {
                         addressDetails.AddressType = Constants.WellKnownAddressType.Unknown;
                     }
-                    addressDetails.RouteOrStreetIdentifier = addressTypeLine;
+                    addressDetails.RouteOrStreetAddress = addressTypeLine;
 
                     #endregion
 

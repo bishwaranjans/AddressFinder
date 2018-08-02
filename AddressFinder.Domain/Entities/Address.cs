@@ -29,7 +29,7 @@ namespace AddressFinder.Domain.Entities
         /// <value>
         /// The route or street identifier.
         /// </value>
-        public string RouteOrStreetIdentifier { get; set; }
+        public string RouteOrStreetAddress { get; set; }
 
         /// <summary>
         /// Gets or sets the municipality.

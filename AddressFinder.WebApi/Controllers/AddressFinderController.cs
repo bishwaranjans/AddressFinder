@@ -30,20 +30,49 @@ namespace AddressFinder.WebApi.Controllers
 
         // GET: api/AddressFinder
         [HttpGet]
-        public IDictionary<string, string> Get()
+        public Dictionary<string, IDictionary<string, string>> Get()
         {
-            var addressFinder = _addressManager.GetAddressFinder("CAN");
-            if (addressFinder != null)
+            var testAddress = new Dictionary<string, IDictionary<string, string>>();
+
+            // Well known canadaian address
+            var canadaianAddressFinder = _addressManager.GetAddressFinder("CAN");
+            if (canadaianAddressFinder != null)
             {
                 var stringAddress = @"BISHWARANJAN SANDHU
                              Marketing Department
                              10-123 1/2 MAIN ST SE
                              MONTREAL QC   H3Z 2Y7";
 
-                var addressDetails = addressFinder.GetAddressFromMultilineString(stringAddress);
-                return addressDetails;
+                var addressDetails = canadaianAddressFinder.GetAddressFromMultilineString(stringAddress);
+                testAddress.Add("CAN", addressDetails);
             }
-            return null;
+
+            // NETHERLANDS address
+            var generalAddressFinder1 = _addressManager.GetAddressFinder("NETHERLANDS");
+            if (generalAddressFinder1 != null)
+            {
+                var stringAddress = @"JOHN JONES
+                             ROTERDAM 7B
+                             3053  ES ROTTERDAM
+                             NETHERLANDS";
+
+                var addressDetails = generalAddressFinder1.GetAddressFromMultilineString(stringAddress);
+                testAddress.Add("NETHERLANDS", addressDetails);
+            }
+
+            // USA
+            var generalAddressFinder2 = _addressManager.GetAddressFinder("USA");
+            if (generalAddressFinder2 != null)
+            {
+                var stringAddress = @"JOHN JONES
+                             101 W MAIN ST S APT 101
+                             WASHINGTON DC 20019-4649
+                             USA";
+
+                var addressDetails = generalAddressFinder2.GetAddressFromMultilineString(stringAddress);
+                testAddress.Add("USA", addressDetails);
+            }
+            return testAddress;
         }
 
         // GET: api/AddressFinder/5
