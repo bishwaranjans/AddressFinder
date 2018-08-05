@@ -17,11 +17,14 @@ namespace AddressFinder.Common
         public static List<RegionInfo> GetCountriesByIso3166()
         {
             List<RegionInfo> countries = new List<RegionInfo>();
-            foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
+            foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.AllCultures & ~CultureTypes.SpecificCultures))
             {
-                RegionInfo country = new RegionInfo(culture.LCID);
-                if (countries.All(p => p.Name != country.Name))
-                    countries.Add(country);
+                if (culture.LCID != 127 && !culture.IsNeutralCulture)
+                {
+                    RegionInfo country = new RegionInfo(culture.LCID);
+                    if (countries.All(p => p.Name != country.Name))
+                        countries.Add(country);
+                }
             }
             return countries.OrderBy(p => p.EnglishName).ToList();
         }
@@ -33,7 +36,7 @@ namespace AddressFinder.Common
         /// <returns>Returns the country region info.</returns>
         public static RegionInfo GetCountryByName(string name)
         {
-            var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
+            var regions = GetCountriesByIso3166();
             return regions.FirstOrDefault(region => region.EnglishName.Contains(name, StringComparison.OrdinalIgnoreCase));
         }
 
@@ -44,9 +47,8 @@ namespace AddressFinder.Common
         /// <returns>Returns the list of countries by selected country codes.</returns>
         public static RegionInfo GetCountryByCode(string code)
         {
-            var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID)).ToList();
+            var regions = GetCountriesByIso3166();
             var regionInfo = regions.FirstOrDefault(region => region.TwoLetterISORegionName.Contains(code, StringComparison.OrdinalIgnoreCase)) ?? regions.FirstOrDefault(region => region.ThreeLetterISORegionName.Contains(code, StringComparison.OrdinalIgnoreCase));
-
             return regionInfo;
         }
 
