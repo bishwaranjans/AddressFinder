@@ -8,5 +8,5 @@ DDD approch has been used for designing the architecture of the solution by clea
  - **AddressFinder.Common** : Responsible for holding all the common functionality/constants of the solution. 
  - **AddressFinder.Domain** : Responsible for representing concepts of the business, information about the business situation, and business rules. State that reflects the business situation is controlled and used here, even though the technical details of storing it are delegated to the infrastructure. This layer is the heart of our solution.
  - **AddressFinder.Infrastructure** : Responsible for how the data that is initially held in domain entities (in memory) is persisted in databases or another persistent store. As of now we have all the extraction logic stored here.
- - **AddressFinder.Tests** : Responsible for mirroring the structure of the code under test. **_TODO_:** *Test cases needs to be done*
+ - **AddressFinder.Tests** : Responsible for mirroring the structure of the code under test. **_TODO_:** *Test cases needs to be written*
  - **AddressFinder.WebApi** : Responsible for defining the jobs the software is supposed to do. This layer should be used to communicate for extraction logic.
